@@ -2,967 +2,2082 @@
 <%@ page import="java.net.*" %>
 
 <%
-InetAddress inetAddress = InetAddress.getLocalHost();
-String serverIP = inetAddress.getHostAddress();
-String serverHostName = inetAddress.getHostName();
+    InetAddress inetAddress = InetAddress.getLocalHost();
 
+    String serverIP = inetAddress.getHostAddress();
+    String serverHostName = inetAddress.getHostName();
 
-String clientIP = request.getRemoteAddr();
-String clientHostName = request.getRemoteHost();
-
+    String clientIP = request.getRemoteAddr();
+    String clientHostName = request.getRemoteHost();
 %>
 
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>DevSecOps.CloudnAI | M CHARAN</title>
+    <title>DevSecOps.CloudnAI | M CHARAN</title>
 
-<link href="images/devops.jpg" rel="icon">
+    <link rel="icon" href="images/devops.jpg">
 
-<!-- Bootstrap -->
-<link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-<!-- Google Font -->
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+          rel="stylesheet">
+
 
 <style>
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #03050a;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================================================
+   CURSOR GLOW
+========================================================= */
+
+.cursor-glow {
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(0, 255, 200, 0.07),
+        transparent 65%
+    );
+
+    pointer-events: none;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+.background-grid {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -2;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 90%
+    );
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav {
+
+    position: fixed;
+
+    top: 0;
+
+    width: 100%;
+
+    z-index: 100;
+
+    padding: 22px 6%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    backdrop-filter: blur(15px);
+
+    background: rgba(3,5,10,0.65);
+
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.logo {
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+
+    color: #00ffc3;
+}
+
+.nav-links {
+
+    display: flex;
+
+    gap: 35px;
+
+    color: #8992a3;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+.nav-links a {
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+
+    color: #00ffc3;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 100vh;
+
+    padding: 150px 7% 80px;
+
+    display: flex;
+
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.hero-container {
+
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: 1.1fr 0.9fr;
+
+    gap: 80px;
+
+    align-items: center;
+}
+
+
+/* LEFT SIDE */
+
+.eyebrow {
+
+    font-family: 'JetBrains Mono', monospace;
+
+    color: #00ffc3;
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+
+    font-size: clamp(
+        55px,
+        7vw,
+        105px
+    );
+
+    line-height: 0.95;
+
+    letter-spacing: -6px;
+
+    font-weight: 900;
+
+    max-width: 850px;
+}
+
+.hero h1 .outline {
+
+    color: transparent;
+
+    -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+}
+
+.hero h1 .green {
+
+    color: #00ffc3;
+}
+
+.hero-description {
+
+    max-width: 650px;
+
+    margin-top: 35px;
+
+    color: #8d96a7;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+}
+
+
+/* BUTTONS */
+
+.hero-buttons {
+
+    margin-top: 40px;
+
+    display: flex;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+.primary-button {
+
+    padding: 15px 25px;
+
+    background: #00ffc3;
+
+    color: #020504;
+
+    border-radius: 5px;
+
+    font-weight: 700;
+
+    transition: 0.3s;
+}
+
+.primary-button:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 40px rgba(0,255,195,0.25);
+}
+
+.secondary-button {
+
+    padding: 15px 25px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    border-radius: 5px;
+
+    color: #ffffff;
+
+    transition: 0.3s;
+}
+
+.secondary-button:hover {
+
+    border-color: #00ffc3;
+
+    color: #00ffc3;
+}
+
+
+/* =========================================================
+   INFRASTRUCTURE VISUAL
+========================================================= */
+
+.infra-visual {
+
+    position: relative;
+
+    height: 500px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.orbit {
+
+    position: absolute;
+
+    width: 420px;
+
+    height: 420px;
+
+    border: 1px solid rgba(0,255,195,0.15);
+
+    border-radius: 50%;
+
+    animation: rotate 25s linear infinite;
+}
+
+.orbit::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 12px;
+
+    height: 12px;
+
+    background: #00ffc3;
+
+    border-radius: 50%;
+
+    top: -6px;
+
+    left: 50%;
+
+    box-shadow:
+        0 0 25px #00ffc3;
+}
+
+.orbit-two {
+
+    width: 300px;
+
+    height: 300px;
+
+    animation-duration: 18s;
+
+    animation-direction: reverse;
+}
+
+.orbit-three {
+
+    width: 190px;
+
+    height: 190px;
+
+    animation-duration: 12s;
+}
+
+@keyframes rotate {
+
+    from {
+        transform: rotate(0deg);
     }
 
-    body {
-        font-family: 'Inter', sans-serif;
-        background: #070b14;
-        color: #ffffff;
-        min-height: 100vh;
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+.core {
+
+    width: 145px;
+
+    height: 145px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,255,195,0.15),
+            #070b11
+        );
+
+    border: 1px solid rgba(0,255,195,0.5);
+
+    box-shadow:
+        0 0 80px rgba(0,255,195,0.12);
+
+    z-index: 5;
+}
+
+.core-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 5px;
+}
+
+.core-text {
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 11px;
+
+    color: #00ffc3;
+
+    letter-spacing: 2px;
+}
+
+
+/* FLOATING TECH */
+
+.tech-node {
+
+    position: absolute;
+
+    padding: 10px 15px;
+
+    background: rgba(7,11,17,0.85);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    backdrop-filter: blur(10px);
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 12px;
+
+    color: #b8c1cf;
+
+    border-radius: 4px;
+}
+
+.node-one {
+
+    top: 55px;
+
+    right: 20px;
+}
+
+.node-two {
+
+    bottom: 65px;
+
+    right: 30px;
+}
+
+.node-three {
+
+    bottom: 40px;
+
+    left: 5px;
+}
+
+.node-four {
+
+    top: 80px;
+
+    left: 15px;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+section {
+
+    padding: 120px 7%;
+
+    position: relative;
+}
+
+.section-container {
+
+    max-width: 1400px;
+
+    margin: auto;
+}
+
+.section-tag {
+
+    font-family: 'JetBrains Mono', monospace;
+
+    color: #00ffc3;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 20px;
+}
+
+.section-heading {
+
+    font-size: clamp(
+        38px,
+        5vw,
+        70px
+    );
+
+    letter-spacing: -3px;
+
+    font-weight: 800;
+
+    max-width: 800px;
+}
+
+.section-description {
+
+    margin-top: 20px;
+
+    color: #7e8798;
+
+    max-width: 650px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   PIPELINE
+========================================================= */
+
+.pipeline {
+
+    margin-top: 70px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    border-top: 1px solid rgba(255,255,255,0.1);
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.pipeline-step {
+
+    padding: 35px 25px;
+
+    border-right: 1px solid rgba(255,255,255,0.08);
+
+    transition: 0.3s;
+}
+
+.pipeline-step:last-child {
+
+    border-right: none;
+}
+
+.pipeline-step:hover {
+
+    background: rgba(0,255,195,0.03);
+}
+
+.step-number {
+
+    font-family: 'JetBrains Mono', monospace;
+
+    color: #596273;
+
+    font-size: 12px;
+
+    margin-bottom: 30px;
+}
+
+.step-icon {
+
+    font-size: 32px;
+
+    margin-bottom: 20px;
+}
+
+.pipeline-step h3 {
+
+    font-size: 18px;
+
+    margin-bottom: 10px;
+}
+
+.pipeline-step p {
+
+    color: #737d8e;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   TECHNOLOGIES
+========================================================= */
+
+.tech-grid {
+
+    margin-top: 60px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 1px;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.tech {
+
+    min-height: 170px;
+
+    padding: 30px;
+
+    background: #03050a;
+
+    transition: 0.3s;
+}
+
+.tech:hover {
+
+    background: #07120f;
+}
+
+.tech-number {
+
+    color: #3e4654;
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 11px;
+}
+
+.tech h3 {
+
+    margin-top: 35px;
+
+    font-size: 20px;
+}
+
+.tech p {
+
+    color: #687284;
+
+    font-size: 13px;
+
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   LIVE SERVER SECTION
+========================================================= */
+
+.server-section {
+
+    background:
+        linear-gradient(
+            180deg,
+            #03050a,
+            #050a0d,
+            #03050a
+        );
+}
+
+.server-layout {
+
+    margin-top: 65px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 25px;
+}
+
+.server-box {
+
+    padding: 35px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.035),
+            rgba(255,255,255,0.01)
+        );
+}
+
+.server-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.server-title {
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 13px;
+
+    color: #aeb6c5;
+}
+
+.online {
+
+    color: #00ffc3;
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 11px;
+}
+
+.online::before {
+
+    content: "";
+
+    display: inline-block;
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #00ffc3;
+
+    margin-right: 8px;
+
+    box-shadow:
+        0 0 10px #00ffc3;
+}
+
+.server-data {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 25px;
+}
+
+.data-label {
+
+    color: #5f6878;
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 8px;
+}
+
+.data-value {
+
+    color: #e4e8ee;
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 14px;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile {
+
+    display: grid;
+
+    grid-template-columns:
+        0.7fr 1.3fr;
+
+    gap: 80px;
+
+    align-items: center;
+
+    margin-top: 70px;
+}
+
+.profile-image-container {
+
+    position: relative;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+.profile-image {
+
+    width: 280px;
+
+    height: 280px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+    filter: grayscale(15%);
+
+    border: 1px solid rgba(0,255,195,0.3);
+
+    box-shadow:
+        20px 20px 0 rgba(0,255,195,0.08);
+}
+
+.profile-name {
+
+    font-size: 50px;
+
+    font-weight: 800;
+
+    letter-spacing: -3px;
+}
+
+.profile-role {
+
+    color: #00ffc3;
+
+    font-family: 'JetBrains Mono', monospace;
+
+    margin-top: 10px;
+
+    font-size: 14px;
+}
+
+.profile-description {
+
+    color: #7d8798;
+
+    line-height: 1.8;
+
+    margin-top: 25px;
+
+    max-width: 650px;
+}
+
+.contact-row {
+
+    margin-top: 30px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.contact-link {
+
+    padding: 10px 15px;
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 11px;
+
+    color: #9ba5b5;
+
+    transition: 0.3s;
+}
+
+.contact-link:hover {
+
+    color: #00ffc3;
+
+    border-color: rgba(0,255,195,0.4);
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta {
+
+    text-align: center;
+
+    padding: 150px 7%;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,255,195,0.08),
+            transparent 45%
+        );
+}
+
+.cta h2 {
+
+    font-size: clamp(
+        45px,
+        7vw,
+        90px
+    );
+
+    letter-spacing: -5px;
+
+    font-weight: 900;
+}
+
+.cta h2 span {
+
+    color: #00ffc3;
+}
+
+.cta p {
+
+    color: #737d8d;
+
+    margin: 25px auto 35px;
+
+    max-width: 550px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    padding: 35px 7%;
+
+    border-top: 1px solid rgba(255,255,255,0.07);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    color: #505968;
+
+    font-family: 'JetBrains Mono', monospace;
+
+    font-size: 11px;
+}
+
+.footer-brand {
+
+    color: #ffffff;
+
+    font-weight: 600;
+}
+
+.footer-brand span {
+
+    color: #00ffc3;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 1000px) {
+
+    .hero-container {
+
+        grid-template-columns: 1fr;
+
     }
 
-    /* =========================
-       NAVBAR
-    ========================== */
+    .infra-visual {
 
-    .navbar {
-        background: rgba(7, 11, 20, 0.85);
-        backdrop-filter: blur(15px);
-        border-bottom: 1px solid rgba(255,255,255,0.08);
-        padding: 18px 0;
+        height: 400px;
+
     }
 
-    .navbar-brand {
-        font-size: 22px;
-        font-weight: 800;
-        color: #ffffff !important;
+    .pipeline {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
     }
 
-    .navbar-brand span {
-        color: #00d4ff;
+    .pipeline-step {
+
+        border-bottom:
+            1px solid rgba(255,255,255,0.08);
+
     }
 
-    .nav-link {
-        color: #b8c1d1 !important;
-        margin-left: 25px;
-        transition: 0.3s;
+    .tech-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
     }
 
-    .nav-link:hover {
-        color: #00d4ff !important;
+    .profile {
+
+        grid-template-columns: 1fr;
+
+        text-align: center;
+
     }
 
-    /* =========================
-       HERO
-    ========================== */
+    .profile-description {
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+    }
+
+    .contact-row {
+
+        justify-content: center;
+
+    }
+
+}
+
+@media(max-width: 600px) {
+
+    nav {
+
+        padding: 18px 5%;
+
+    }
+
+    .nav-links {
+
+        display: none;
+
+    }
 
     .hero {
-        min-height: 560px;
-        display: flex;
-        align-items: center;
-        position: relative;
-        overflow: hidden;
-        background:
-            radial-gradient(circle at 15% 20%, rgba(0,212,255,0.15), transparent 30%),
-            radial-gradient(circle at 85% 30%, rgba(123,97,255,0.18), transparent 30%),
-            #070b14;
-    }
 
-    .hero-content {
-        max-width: 900px;
-        margin: auto;
-        text-align: center;
-        position: relative;
-        z-index: 2;
-    }
+        padding-left: 5%;
 
-    .badge-custom {
-        display: inline-block;
-        padding: 8px 18px;
-        border-radius: 50px;
-        background: rgba(0,212,255,0.10);
-        border: 1px solid rgba(0,212,255,0.3);
-        color: #00d4ff;
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 25px;
+        padding-right: 5%;
+
     }
 
     .hero h1 {
-        font-size: clamp(42px, 7vw, 78px);
-        font-weight: 800;
-        line-height: 1.05;
-        margin-bottom: 25px;
+
+        letter-spacing: -3px;
+
     }
 
-    .gradient-text {
-        background: linear-gradient(
-            90deg,
-            #00d4ff,
-            #6c63ff,
-            #b36cff
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+    section {
+
+        padding: 80px 5%;
+
     }
 
-    .hero p {
-        color: #aeb7c7;
-        font-size: 19px;
-        max-width: 720px;
-        margin: auto;
-        line-height: 1.7;
+    .pipeline {
+
+        grid-template-columns: 1fr;
+
     }
 
-    .hero-buttons {
-        margin-top: 35px;
+    .tech-grid {
+
+        grid-template-columns: 1fr;
+
     }
 
-    .btn-primary-custom {
-        background: linear-gradient(90deg, #007bff, #00c6ff);
-        border: none;
-        padding: 14px 28px;
-        border-radius: 10px;
-        color: white;
-        font-weight: 600;
-        text-decoration: none;
-        display: inline-block;
-        margin: 5px;
-        transition: 0.3s;
+    .server-layout {
+
+        grid-template-columns: 1fr;
+
     }
 
-    .btn-primary-custom:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(0,198,255,0.25);
-        color: white;
+    .server-data {
+
+        grid-template-columns: 1fr;
+
     }
 
-    .btn-outline-custom {
-        border: 1px solid rgba(255,255,255,0.2);
-        padding: 14px 28px;
-        border-radius: 10px;
-        color: white;
-        text-decoration: none;
-        display: inline-block;
-        margin: 5px;
-        transition: 0.3s;
+    .orbit {
+
+        width: 300px;
+
+        height: 300px;
+
     }
 
-    .btn-outline-custom:hover {
-        background: rgba(255,255,255,0.08);
-        color: white;
+    .orbit-two {
+
+        width: 220px;
+
+        height: 220px;
+
     }
 
-    /* =========================
-       SECTION
-    ========================== */
+    .orbit-three {
 
-    .section {
-        padding: 80px 0;
+        width: 140px;
+
+        height: 140px;
+
     }
 
-    .section-title {
-        text-align: center;
-        margin-bottom: 50px;
+    .profile-name {
+
+        font-size: 38px;
+
     }
-
-    .section-title h2 {
-        font-size: 36px;
-        font-weight: 800;
-    }
-
-    .section-title p {
-        color: #8994a8;
-        margin-top: 10px;
-    }
-
-    /* =========================
-       CARDS
-    ========================== */
-
-    .glass-card {
-        height: 100%;
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 18px;
-        padding: 28px;
-        transition: 0.35s;
-        backdrop-filter: blur(12px);
-    }
-
-    .glass-card:hover {
-        transform: translateY(-7px);
-        border-color: rgba(0,212,255,0.35);
-        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-    }
-
-    .card-icon {
-        width: 55px;
-        height: 55px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 14px;
-        background: rgba(0,212,255,0.1);
-        font-size: 25px;
-        margin-bottom: 20px;
-    }
-
-    .glass-card h4 {
-        font-weight: 700;
-        margin-bottom: 12px;
-    }
-
-    .glass-card p {
-        color: #919caf;
-        margin-bottom: 0;
-    }
-
-    /* =========================
-       SERVER DASHBOARD
-    ========================== */
-
-    .info-value {
-        color: #00d4ff;
-        font-size: 17px;
-        font-weight: 600;
-        word-break: break-word;
-    }
-
-    .info-label {
-        color: #7e899d;
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 5px;
-    }
-
-    .status {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        padding: 6px 12px;
-        border-radius: 50px;
-        background: rgba(25, 210, 120, 0.1);
-        color: #29dc88;
-        font-size: 13px;
-        font-weight: 600;
-    }
-
-    .status-dot {
-        width: 8px;
-        height: 8px;
-        background: #29dc88;
-        border-radius: 50%;
-    }
-
-    /* =========================
-       TECHNOLOGIES
-    ========================== */
-
-    .tech-card {
-        text-align: center;
-        padding: 25px;
-        background: rgba(255,255,255,0.035);
-        border: 1px solid rgba(255,255,255,0.07);
-        border-radius: 15px;
-        transition: 0.3s;
-    }
-
-    .tech-card:hover {
-        transform: translateY(-5px);
-        background: rgba(255,255,255,0.07);
-    }
-
-    .tech-icon {
-        font-size: 35px;
-        margin-bottom: 12px;
-    }
-
-    .tech-card h6 {
-        font-weight: 600;
-        margin: 0;
-    }
-
-    /* =========================
-       PROFILE
-    ========================== */
-
-    .profile-card {
-        max-width: 850px;
-        margin: auto;
-        text-align: center;
-        padding: 45px;
-        background:
-            linear-gradient(
-                145deg,
-                rgba(0,212,255,0.08),
-                rgba(108,99,255,0.08)
-            );
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 25px;
-    }
-
-    .profile-image {
-        width: 125px;
-        height: 125px;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 4px solid rgba(0,212,255,0.5);
-        margin-bottom: 20px;
-    }
-
-    .profile-card h3 {
-        font-weight: 800;
-    }
-
-    .profile-card p {
-        color: #a3adbd;
-    }
-
-    .contact-info {
-        margin: 20px 0;
-        line-height: 2;
-    }
-
-    .contact-info a {
-        color: #00d4ff;
-        text-decoration: none;
-    }
-
-    /* =========================
-       SERVICES
-    ========================== */
-
-    .service-card {
-        padding: 30px;
-        border-radius: 18px;
-        background: linear-gradient(
-            145deg,
-            rgba(255,255,255,0.05),
-            rgba(255,255,255,0.02)
-        );
-        border: 1px solid rgba(255,255,255,0.08);
-        height: 100%;
-    }
-
-    .service-card h4 {
-        font-weight: 700;
-    }
-
-    .service-card p {
-        color: #8d98aa;
-        line-height: 1.7;
-    }
-
-    /* =========================
-       FOOTER
-    ========================== */
 
     footer {
-        border-top: 1px solid rgba(255,255,255,0.08);
-        padding: 35px 0;
+
+        flex-direction: column;
+
+        gap: 10px;
+
         text-align: center;
-        color: #6f7a8d;
-        background: #050810;
+
     }
 
-    footer strong {
-        color: #ffffff;
-    }
-
-    footer a {
-        color: #00d4ff;
-        text-decoration: none;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media(max-width: 768px) {
-
-        .hero {
-            min-height: 500px;
-        }
-
-        .hero h1 {
-            font-size: 45px;
-        }
-
-        .hero p {
-            font-size: 16px;
-        }
-
-        .section {
-            padding: 55px 0;
-        }
-
-        .profile-card {
-            padding: 30px 20px;
-        }
-
-        .nav-link {
-            margin-left: 0;
-        }
-    }
+}
 
 </style>
 
-
 </head>
+
 
 <body>
 
-<!-- =========================
+
+<!-- BACKGROUND -->
+
+<div class="background-grid"></div>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+
+<!-- ======================================================
      NAVIGATION
-========================== -->
+======================================================= -->
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+<nav>
 
-
-<div class="container">
-
-    <a class="navbar-brand" href="#">
+    <div class="logo">
         DevSecOps<span>.CloudnAI</span>
-    </a>
-
-    <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav">
-
-        <span class="navbar-toggler-icon"></span>
-
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-
-        <ul class="navbar-nav ms-auto">
-
-            <li class="nav-item">
-                <a class="nav-link" href="#about">About</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#infrastructure">Infrastructure</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#services">Services</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="#contact">Contact</a>
-            </li>
-
-        </ul>
-
     </div>
 
-</div>
+    <div class="nav-links">
 
+        <a href="#platform">
+            Platform
+        </a>
+
+        <a href="#technology">
+            Technology
+        </a>
+
+        <a href="#infrastructure">
+            Infrastructure
+        </a>
+
+        <a href="#contact">
+            Contact
+        </a>
+
+    </div>
 
 </nav>
 
-<!-- =========================
+
+<!-- ======================================================
      HERO
-========================== -->
+======================================================= -->
 
-<section class="hero" id="about">
+<section class="hero">
+
+    <div class="hero-container">
 
 
-<div class="container">
+        <!-- LEFT -->
 
-    <div class="hero-content">
+        <div>
 
-        <div class="badge-custom">
-            ⚡ CLOUD • DEVOPS • DEVSECOPS • AIOPS
+            <div class="eyebrow">
+                SYSTEM / CLOUD / AUTOMATION
+            </div>
+
+
+            <h1>
+
+                CODE
+
+                <span class="outline">
+                    TO
+                </span>
+
+                <span class="green">
+                    CLOUD
+                </span>
+
+                <br>
+
+                WITHOUT
+
+                <span class="outline">
+                    LIMITS
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Engineering modern infrastructure with
+                cloud automation, DevSecOps practices,
+                containers, Kubernetes and continuous delivery.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#infrastructure"
+                    class="primary-button">
+
+                    Explore Platform →
+
+                </a>
+
+
+                <a
+                    href="services/employee/getEmployeeDetails"
+                    class="secondary-button">
+
+                    View Employee API
+
+                </a>
+
+            </div>
+
         </div>
 
-        <h1>
-            Build.
-            <span class="gradient-text">Automate.</span>
-            Secure.
-        </h1>
 
-        <p>
-            Welcome to the DevSecOps.CloudnAI platform —
-            where cloud infrastructure, automation, security,
-            Kubernetes and modern DevOps practices come together.
-        </p>
+        <!-- RIGHT VISUAL -->
 
-        <div class="hero-buttons">
+        <div class="infra-visual">
 
-            <a
-                href="services/employee/getEmployeeDetails"
-                class="btn-primary-custom">
 
-                🚀 Get Employee Details
+            <div class="orbit"></div>
 
-            </a>
+            <div class="orbit orbit-two"></div>
 
-            <a
-                href="#infrastructure"
-                class="btn-outline-custom">
+            <div class="orbit orbit-three"></div>
 
-                Explore Infrastructure →
 
-            </a>
+            <div class="core">
+
+                <div class="core-icon">
+                    ☁
+                </div>
+
+                <div class="core-text">
+                    CLOUD
+                </div>
+
+            </div>
+
+
+            <div class="tech-node node-one">
+                AWS
+            </div>
+
+            <div class="tech-node node-two">
+                KUBERNETES
+            </div>
+
+            <div class="tech-node node-three">
+                TERRAFORM
+            </div>
+
+            <div class="tech-node node-four">
+                CI/CD
+            </div>
+
 
         </div>
 
     </div>
-
-</div>
-
 
 </section>
 
-<!-- =========================
-     INFRASTRUCTURE
-========================== -->
 
-<section class="section" id="infrastructure">
+<!-- ======================================================
+     PLATFORM
+======================================================= -->
 
+<section id="platform">
 
-<div class="container">
+    <div class="section-container">
 
-    <div class="section-title">
+        <div class="section-tag">
+            01 / DELIVERY PIPELINE
+        </div>
 
-        <h2>Infrastructure Dashboard</h2>
+        <h2 class="section-heading">
 
-        <p>
-            Real-time information from your application server
+            From a single commit
+            to a running workload.
+
+        </h2>
+
+        <p class="section-description">
+
+            A modern engineering workflow connects source
+            code, automation, security, infrastructure and
+            production deployment into one continuous flow.
+
         </p>
+
+
+        <div class="pipeline">
+
+
+            <div class="pipeline-step">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <div class="step-icon">
+                    🧑‍💻
+                </div>
+
+                <h3>
+                    CODE
+                </h3>
+
+                <p>
+                    Developers commit and push changes
+                    through Git-based workflows.
+                </p>
+
+            </div>
+
+
+            <div class="pipeline-step">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <div class="step-icon">
+                    ⚙️
+                </div>
+
+                <h3>
+                    BUILD
+                </h3>
+
+                <p>
+                    Automated pipelines compile,
+                    package and validate applications.
+                </p>
+
+            </div>
+
+
+            <div class="pipeline-step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <div class="step-icon">
+                    🛡️
+                </div>
+
+                <h3>
+                    SECURE
+                </h3>
+
+                <p>
+                    Security checks become part of
+                    the software delivery lifecycle.
+                </p>
+
+            </div>
+
+
+            <div class="pipeline-step">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <div class="step-icon">
+                    🏗️
+                </div>
+
+                <h3>
+                    PROVISION
+                </h3>
+
+                <p>
+                    Infrastructure is created and
+                    managed using Infrastructure as Code.
+                </p>
+
+            </div>
+
+
+            <div class="pipeline-step">
+
+                <div class="step-number">
+                    05
+                </div>
+
+                <div class="step-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    DEPLOY
+                </h3>
+
+                <p>
+                    Applications move into cloud-native
+                    runtime environments.
+                </p>
+
+            </div>
+
+
+        </div>
 
     </div>
 
+</section>
 
-    <div class="row g-4">
 
-        <!-- Server -->
+<!-- ======================================================
+     TECHNOLOGY
+======================================================= -->
 
-        <div class="col-lg-6">
+<section id="technology">
 
-            <div class="glass-card">
+    <div class="section-container">
 
-                <div class="card-icon">
-                    🖥️
+        <div class="section-tag">
+            02 / ENGINEERING STACK
+        </div>
+
+        <h2 class="section-heading">
+
+            The tools behind
+            the infrastructure.
+
+        </h2>
+
+
+        <div class="tech-grid">
+
+
+            <div class="tech">
+
+                <div class="tech-number">
+                    01
                 </div>
 
-                <h4>Server Information</h4>
+                <h3>
+                    AWS
+                </h3>
 
-                <hr>
+                <p>
+                    Cloud infrastructure
+                </p>
 
-                <div class="row g-4">
+            </div>
 
-                    <div class="col-sm-6">
 
-                        <div class="info-label">
+            <div class="tech">
+
+                <div class="tech-number">
+                    02
+                </div>
+
+                <h3>
+                    Kubernetes
+                </h3>
+
+                <p>
+                    Container orchestration
+                </p>
+
+            </div>
+
+
+            <div class="tech">
+
+                <div class="tech-number">
+                    03
+                </div>
+
+                <h3>
+                    Terraform
+                </h3>
+
+                <p>
+                    Infrastructure as Code
+                </p>
+
+            </div>
+
+
+            <div class="tech">
+
+                <div class="tech-number">
+                    04
+                </div>
+
+                <h3>
+                    Docker
+                </h3>
+
+                <p>
+                    Container platform
+                </p>
+
+            </div>
+
+
+            <div class="tech">
+
+                <div class="tech-number">
+                    05
+                </div>
+
+                <h3>
+                    Jenkins
+                </h3>
+
+                <p>
+                    Continuous Integration
+                </p>
+
+            </div>
+
+
+            <div class="tech">
+
+                <div class="tech-number">
+                    06
+                </div>
+
+                <h3>
+                    GitHub
+                </h3>
+
+                <p>
+                    Source control & collaboration
+                </p>
+
+            </div>
+
+
+            <div class="tech">
+
+                <div class="tech-number">
+                    07
+                </div>
+
+                <h3>
+                    DevSecOps
+                </h3>
+
+                <p>
+                    Security-driven delivery
+                </p>
+
+            </div>
+
+
+            <div class="tech">
+
+                <div class="tech-number">
+                    08
+                </div>
+
+                <h3>
+                    AIOps
+                </h3>
+
+                <p>
+                    Intelligent operations
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     LIVE INFRASTRUCTURE
+======================================================= -->
+
+<section
+    id="infrastructure"
+    class="server-section">
+
+    <div class="section-container">
+
+        <div class="section-tag">
+            03 / LIVE ENVIRONMENT
+        </div>
+
+        <h2 class="section-heading">
+
+            This page is running
+            somewhere.
+
+        </h2>
+
+        <p class="section-description">
+
+            And you can see exactly where the application
+            request is being processed.
+
+        </p>
+
+
+        <div class="server-layout">
+
+
+            <!-- SERVER -->
+
+            <div class="server-box">
+
+                <div class="server-header">
+
+                    <div class="server-title">
+                        APPLICATION SERVER
+                    </div>
+
+                    <div class="online">
+                        ONLINE
+                    </div>
+
+                </div>
+
+
+                <div class="server-data">
+
+
+                    <div>
+
+                        <div class="data-label">
                             Host Name
                         </div>
 
-                        <div class="info-value">
+                        <div class="data-value">
                             <%= serverHostName %>
                         </div>
 
                     </div>
 
-                    <div class="col-sm-6">
 
-                        <div class="info-label">
+                    <div>
+
+                        <div class="data-label">
                             Server IP
                         </div>
 
-                        <div class="info-value">
+                        <div class="data-value">
                             <%= serverIP %>
                         </div>
 
                     </div>
 
-                    <div class="col-12">
-
-                        <span class="status">
-
-                            <span class="status-dot"></span>
-
-                            Application Server Online
-
-                        </span>
-
-                    </div>
 
                 </div>
 
             </div>
 
-        </div>
 
+            <!-- CLIENT -->
 
-        <!-- Client -->
+            <div class="server-box">
 
-        <div class="col-lg-6">
+                <div class="server-header">
 
-            <div class="glass-card">
+                    <div class="server-title">
+                        CLIENT REQUEST
+                    </div>
 
-                <div class="card-icon">
-                    🌐
+                    <div class="online">
+                        CONNECTED
+                    </div>
+
                 </div>
 
-                <h4>Client Information</h4>
 
-                <hr>
+                <div class="server-data">
 
-                <div class="row g-4">
 
-                    <div class="col-sm-6">
+                    <div>
 
-                        <div class="info-label">
+                        <div class="data-label">
                             Client IP
                         </div>
 
-                        <div class="info-value">
+                        <div class="data-value">
                             <%= clientIP %>
                         </div>
 
                     </div>
 
-                    <div class="col-sm-6">
 
-                        <div class="info-label">
+                    <div>
+
+                        <div class="data-label">
                             Client Host
                         </div>
 
-                        <div class="info-value">
+                        <div class="data-value">
                             <%= clientHostName %>
                         </div>
 
                     </div>
 
-                    <div class="col-12">
-
-                        <span class="status">
-
-                            <span class="status-dot"></span>
-
-                            Client Connected
-
-                        </span>
-
-                    </div>
 
                 </div>
 
             </div>
 
+
         </div>
 
     </div>
-
-</div>
-
 
 </section>
 
-<!-- =========================
-     TECHNOLOGIES
-========================== -->
 
-<section class="section">
+<!-- ======================================================
+     PROFILE
+======================================================= -->
 
+<section id="contact">
 
-<div class="container">
-
-    <div class="section-title">
-
-        <h2>DevOps Technology Stack</h2>
-
-        <p>
-            Technologies used across modern cloud-native environments
-        </p>
-
-    </div>
+    <div class="section-container">
 
 
-    <div class="row g-3">
-
-        <div class="col-6 col-md-3">
-            <div class="tech-card">
-                <div class="tech-icon">☁️</div>
-                <h6>AWS Cloud</h6>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <div class="tech-card">
-                <div class="tech-icon">🐳</div>
-                <h6>Docker</h6>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <div class="tech-card">
-                <div class="tech-icon">☸️</div>
-                <h6>Kubernetes</h6>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <div class="tech-card">
-                <div class="tech-icon">🔧</div>
-                <h6>Terraform</h6>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <div class="tech-card">
-                <div class="tech-icon">🔄</div>
-                <h6>Jenkins</h6>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <div class="tech-card">
-                <div class="tech-icon">🐙</div>
-                <h6>GitHub</h6>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <div class="tech-card">
-                <div class="tech-icon">🛡️</div>
-                <h6>DevSecOps</h6>
-            </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-            <div class="tech-card">
-                <div class="tech-icon">🤖</div>
-                <h6>AIOps</h6>
-            </div>
-        </div>
-
-    </div>
-
-</div>
-
-
-</section>
-
-<!-- =========================
-     SERVICES
-========================== -->
-
-<section class="section" id="services">
-
-
-<div class="container">
-
-    <div class="section-title">
-
-        <h2>What We Do</h2>
-
-        <p>
-            Cloud and DevOps solutions for modern engineering teams
-        </p>
-
-    </div>
-
-
-    <div class="row g-4">
-
-        <div class="col-md-4">
-
-            <div class="service-card">
-
-                <div class="card-icon">
-                    ☁️
-                </div>
-
-                <h4>Cloud Engineering</h4>
-
-                <p>
-                    Design and automate scalable AWS cloud
-                    infrastructure using modern cloud-native
-                    architecture.
-                </p>
-
-            </div>
-
+        <div class="section-tag">
+            04 / ENGINEER
         </div>
 
 
-        <div class="col-md-4">
+        <div class="profile">
 
-            <div class="service-card">
 
-                <div class="card-icon">
-                    🚀
-                </div>
+            <div class="profile-image-container">
 
-                <h4>DevOps Automation</h4>
-
-                <p>
-                    Build CI/CD pipelines, infrastructure automation,
-                    container platforms and reliable deployment
-                    workflows.
-                </p>
+                <img
+                    src="images/devops.jpg"
+                    alt="M CHARAN"
+                    class="profile-image">
 
             </div>
 
-        </div>
-
-
-        <div class="col-md-4">
-
-            <div class="service-card">
-
-                <div class="card-icon">
-                    🛡️
-                </div>
-
-                <h4>DevSecOps</h4>
-
-                <p>
-                    Integrate security into the software delivery
-                    lifecycle with automated scanning and secure
-                    cloud practices.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-</section>
-
-<!-- =========================
-     PROFILE / CONTACT
-========================== -->
-
-<section class="section" id="contact">
-
-
-<div class="container">
-
-    <div class="profile-card">
-
-        <img
-            src="images/devops.jpg"
-            alt="M CHARAN"
-            class="profile-image">
-
-        <h3>M CHARAN</h3>
-
-        <p>
-            Cloud • DevOps • DevSecOps • AIOps
-        </p>
-
-        <div class="contact-info">
 
             <div>
-                📍 <strong>Whitefield, Bangalore</strong>
+
+                <h2 class="profile-name">
+                    M CHARAN
+                </h2>
+
+
+                <div class="profile-role">
+
+                    CLOUD / DEVOPS / DEVSECOPS / AIOPS
+
+                </div>
+
+
+                <p class="profile-description">
+
+                    Building, automating and operating modern
+                    cloud infrastructure with a focus on
+                    reliability, security and continuous delivery.
+
+                    <br><br>
+
+                    DevSecOps.CloudnAI is a technology platform
+                    focused on practical cloud engineering,
+                    automation and DevOps learning.
+
+                </p>
+
+
+                <div class="contact-row">
+
+
+                    <a
+                        href="mailto:devsecopscloudnai@gmail.com"
+                        class="contact-link">
+
+                        EMAIL
+
+                    </a>
+
+
+                    <a
+                        href="tel:+919876543210"
+                        class="contact-link">
+
+                        PHONE
+
+                    </a>
+
+
+                    <a
+                        href="services/employee/getEmployeeDetails"
+                        class="contact-link">
+
+                        EMPLOYEE API
+
+                    </a>
+
+
+                </div>
+
             </div>
 
-            <div>
-                📞
-                <a href="tel:+919876543210">
-                    +91-9876543210
-                </a>
-            </div>
-
-            <div>
-                ✉️
-                <a href="mailto:devsecopscloudnai@gmail.com">
-                    devsecopscloudnai@gmail.com
-                </a>
-            </div>
 
         </div>
 
-        <a
-            href="mailto:devsecopscloudnai@gmail.com"
-            class="btn-primary-custom">
-
-            ✉️ Contact M CHARAN
-
-        </a>
-
     </div>
-
-</div>
-
 
 </section>
 
-<!-- =========================
+
+<!-- ======================================================
+     CTA
+======================================================= -->
+
+<section class="cta">
+
+    <h2>
+
+        BUILD
+
+        <span>
+            SOMETHING
+        </span>
+
+        REAL.
+
+    </h2>
+
+
+    <p>
+
+        Learn cloud. Automate infrastructure.
+        Secure the pipeline. Deploy with confidence.
+
+    </p>
+
+
+    <a
+        href="services/employee/getEmployeeDetails"
+        class="primary-button">
+
+        Enter the Platform →
+
+    </a>
+
+</section>
+
+
+<!-- ======================================================
      FOOTER
-========================== -->
+======================================================= -->
 
 <footer>
 
+    <div>
 
-<div class="container">
+        <span class="footer-brand">
+            DevSecOps<span>.CloudnAI</span>
+        </span>
 
-    <p>
+        &nbsp; / &nbsp;
+
+        M CHARAN
+
+    </div>
+
+
+    <div>
+
         © 2026
-        <strong>DevSecOps.CloudnAI</strong>
-        — M CHARAN
-    </p>
 
-    <p>
-        Cloud • DevOps • DevSecOps • AIOps
-    </p>
-
-    <small>
-        Built with Java • JSP • Bootstrap
-    </small>
-
-</div>
-
+    </div>
 
 </footer>
 
-<!-- Bootstrap JS -->
 
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+<!-- ======================================================
+     JAVASCRIPT
+======================================================= -->
+
+<script>
+
+    /*
+     * Mouse-following glow
+     */
+
+    const glow =
+        document.getElementById("cursorGlow");
+
+    document.addEventListener(
+        "mousemove",
+        function(event) {
+
+            glow.style.left =
+                event.clientX + "px";
+
+            glow.style.top =
+                event.clientY + "px";
+
+        }
+    );
+
+
+    /*
+     * Small reveal animation
+     */
+
+    const elements =
+        document.querySelectorAll(
+            ".pipeline-step, .tech, .server-box"
+        );
+
+
+    const observer =
+        new IntersectionObserver(
+            function(entries) {
+
+                entries.forEach(
+                    function(entry) {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.style.opacity = "1";
+
+                            entry.target.style.transform =
+                                "translateY(0)";
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+    elements.forEach(
+        function(element) {
+
+            element.style.opacity = "0";
+
+            element.style.transform =
+                "translateY(25px)";
+
+            element.style.transition =
+                "all 0.7s ease";
+
+            observer.observe(element);
+
+        }
+    );
+
 </script>
+
 
 </body>
 
