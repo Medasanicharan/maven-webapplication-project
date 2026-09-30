@@ -6,10 +6,9 @@ InetAddress inetAddress = InetAddress.getLocalHost();
 String serverIP = inetAddress.getHostAddress();
 String serverHostName = inetAddress.getHostName();
 
-```
+
 String clientIP = request.getRemoteAddr();
 String clientHostName = request.getRemoteHost();
-```
 
 %>
 
@@ -21,7 +20,7 @@ String clientHostName = request.getRemoteHost();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
+
 <title>DevSecOps.CloudnAI | M CHARAN</title>
 
 <link href="images/devops.jpg" rel="icon">
@@ -438,7 +437,7 @@ String clientHostName = request.getRemoteHost();
     }
 
 </style>
-```
+
 
 </head>
 
@@ -450,7 +449,7 @@ String clientHostName = request.getRemoteHost();
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
 
-```
+
 <div class="container">
 
     <a class="navbar-brand" href="#">
@@ -492,7 +491,7 @@ String clientHostName = request.getRemoteHost();
     </div>
 
 </div>
-```
+
 
 </nav>
 
@@ -502,7 +501,7 @@ String clientHostName = request.getRemoteHost();
 
 <section class="hero" id="about">
 
-```
+
 <div class="container">
 
     <div class="hero-content">
@@ -546,7 +545,7 @@ String clientHostName = request.getRemoteHost();
     </div>
 
 </div>
-```
+
 
 </section>
 
@@ -556,7 +555,7 @@ String clientHostName = request.getRemoteHost();
 
 <section class="section" id="infrastructure">
 
-```
+
 <div class="container">
 
     <div class="section-title">
@@ -692,7 +691,7 @@ String clientHostName = request.getRemoteHost();
     </div>
 
 </div>
-```
+
 
 </section>
 
@@ -702,7 +701,7 @@ String clientHostName = request.getRemoteHost();
 
 <section class="section">
 
-```
+
 <div class="container">
 
     <div class="section-title">
@@ -777,7 +776,7 @@ String clientHostName = request.getRemoteHost();
     </div>
 
 </div>
-```
+
 
 </section>
 
@@ -787,7 +786,7 @@ String clientHostName = request.getRemoteHost();
 
 <section class="section" id="services">
 
-```
+
 <div class="container">
 
     <div class="section-title">
@@ -868,7 +867,7 @@ String clientHostName = request.getRemoteHost();
     </div>
 
 </div>
-```
+
 
 </section>
 
@@ -878,7 +877,7 @@ String clientHostName = request.getRemoteHost();
 
 <section class="section" id="contact">
 
-```
+
 <div class="container">
 
     <div class="profile-card">
@@ -927,7 +926,7 @@ String clientHostName = request.getRemoteHost();
     </div>
 
 </div>
-```
+
 
 </section>
 
@@ -937,7 +936,7 @@ String clientHostName = request.getRemoteHost();
 
 <footer>
 
-```
+
 <div class="container">
 
     <p>
@@ -955,7 +954,7 @@ String clientHostName = request.getRemoteHost();
     </small>
 
 </div>
-```
+
 
 </footer>
 
