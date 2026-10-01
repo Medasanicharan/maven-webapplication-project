@@ -97,13 +97,13 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>M CHARAN Releases Nexus Repository</name>
-	      <url>http://35.153.159.156:8081/repository/devops-release/</url>
+	      <url>http://98.93.105.101:8081/repository/devops-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>M CHARAN Snapshot Nexus Repository </name>
-	      <url>http://35.153.159.156:8081/repository/devops-snapshot/</url>
+	      <url>http://98.93.105.101:8081/repository/devops-snapshot/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
