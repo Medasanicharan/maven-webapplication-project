@@ -12,7 +12,7 @@
     body {
         background: #f9f9f9;
         font-family: Arial, sans-serif;
-    }
+    } 
     header {
         background: linear-gradient(90deg, #007bff, #00c6ff);
         color: white;
