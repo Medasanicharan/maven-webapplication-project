@@ -46,9 +46,10 @@
 <body>
 
 <header>
-  <!--  <marquee> <h1>🚀 Welcome to DevSecOps.CloudnAI portal 🚀</h1> </marquee>
+  <marquee> <h1>🚀 Welcome to DevSecOps.CloudnAI portal 🚀</h1> </marquee>
+
+ <!--    <h1>🚀 Welcome to DevSecOps.CloudnAI portal 🚀</h1>
 --> 
-    <h1>🚀 Welcome to DevSecOps.CloudnAI portal 🚀</h1>
     <h3>Training | Development | Consulting</h3>
 </header>
 
