@@ -22,7 +22,7 @@
 		<spring.version>5.3.34</spring.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
-		<sonar.host.url>http://172.31.30.78:9000/</sonar.host.url>
+		<sonar.host.url>http://172.31.29.24:9000/</sonar.host.url>
 		<sonar.token>sqa_6a54cf4006dabc5efa2fba35958d8b8dfb683fa0</sonar.token>
 		<!-- <sonar.login>admin</sonar.login>
 		<sonar.password>password</sonar.password>  -->
@@ -100,14 +100,14 @@
 	    <repository>
 	      <id>nexus</id>
 	      <name>M CHARAN Releases Nexus Repository</name>
-	      <url>http://172.31.31.218:8081/repository/devops-release/</url>
+	      <url>http://172.31.19.118:8081/repository/devops-release/</url>
 		  <!-- <url>http://18.209.51.90:8081/repository/devops-release/</url> -->
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>M CHARAN Snapshot Nexus Repository </name>
-	      <url>http://172.31.31.218:8081/repository/devops-snapshot/</url>
+	      <url>http://172.31.19.118:8081/repository/devops-snapshot/</url>
 		  <!-- <url>http://18.209.51.90:8081/repository/devops-snapshot/</url> -->
 	    </snapshotRepository>
 	    
